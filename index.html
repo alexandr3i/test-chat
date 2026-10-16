@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista mea — Pas cu pas</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#243c35;background:#f5f4ef}*{box-sizing:border-box}body{margin:0}main{max-width:700px;margin:70px auto;padding:0 24px}.brand{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#587467;font-weight:700}.brand span{display:inline-grid;place-items:center;background:#dce9dd;border-radius:12px;width:32px;height:32px;margin-right:10px}h1{font-size:clamp(36px,7vw,52px);letter-spacing:-2px;margin:27px 0 8px}header p{color:#718078;margin:0 0 32px;line-height:1.6}.card{background:#fff;border:1px solid #e3e7df;border-radius:24px;padding:26px;box-shadow:0 12px 40px #263c3505}form{display:flex;gap:10px}input[type=text]{min-width:0;flex:1;border:1px solid #dce3da;border-radius:12px;padding:15px;font:inherit;background:#fafbf8;color:#243c35;caret-color:#243c35}input[type=text]::placeholder{color:#718078;opacity:1}input:focus-visible,button:focus-visible{outline:3px solid #95b6a0;outline-offset:3px}button{font:inherit;cursor:pointer}button.primary{background:#2e5f49;color:white;border:0;border-radius:12px;padding:12px 20px;font-weight:650}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:26px;border-bottom:1px solid #edf0e9;padding-bottom:18px}.filters{display:flex;gap:4px}.filters button{border:0;background:transparent;color:#738077;border-radius:8px;padding:8px 10px;font-size:13px}.filters button[aria-pressed=true]{background:#e9f0e7;color:#2e5f49;font-weight:700}#count{font-size:12px;color:#738077}ul{list-style:none;margin:0;padding:0}li{display:flex;align-items:center;gap:12px;padding:17px 0;border-bottom:1px solid #edf0e9}li input{accent-color:#2e5f49;width:19px;height:19px;flex-shrink:0}li label{flex:1;overflow-wrap:anywhere;line-height:1.5}li.done label{text-decoration:line-through;color:#929c93}.delete{border:0;background:transparent;color:#8c978f;font-size:23px;padding:2px 8px}.delete:hover{color:#b34242;background:#fff1ef;border-radius:6px}.empty{text-align:center;padding:46px 12px;color:#7c8980}.empty strong{display:block;color:#3f5c4b;font-weight:600;margin:14px 0 7px}.empty span{font-size:14px}.icon{font-size:32px}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:20px;font-size:12px;color:#869086}.clear{border:0;background:transparent;color:#56705d;font-size:12px;padding:5px}.clear:disabled{opacity:.4;cursor:default}footer{text-align:center;color:#899287;font-size:12px;margin:25px}#notice{font-size:13px;color:#a34932;line-height:1.5} @media(max-width:480px){main{margin:35px auto;padding:0 16px}.card{padding:18px}.toolbar{align-items:flex-start;flex-direction:column}button.primary{padding:12px}form{gap:7px}.bottom{align-items:flex-start}}
+</style>
+</head>
+<body>
+<main>
+<div class="brand"><span aria-hidden="true">✓</span> Pas cu pas</div>
+<header><h1>Mai puțin haos.<br>Mai mult făcut.</h1><p>Un loc simplu pentru lucrurile pe care vrei să le faci.</p></header>
+<section class="card" aria-label="Lista de sarcini">
+<form id="add-form"><input id="task" type="text" maxlength="300" placeholder="Ce ai de făcut?" aria-label="Sarcină nouă" required autocomplete="off"><button class="primary" type="submit">Adaugă +</button></form>
+<div class="toolbar"><div class="filters" aria-label="Filtrează sarcinile"><button type="button" data-filter="all" aria-pressed="true">Toate</button><button type="button" data-filter="active" aria-pressed="false">De făcut</button><button type="button" data-filter="done" aria-pressed="false">Terminate</button></div><span id="count" aria-live="polite"></span></div>
+<ul id="list" aria-label="Sarcini"></ul>
+<div id="empty" class="empty"><div class="icon" aria-hidden="true">☀</div><strong>Un început cu mintea limpede.</strong><span>Adaugă prima sarcină și ia lucrurile pe rând.</span></div>
+<div class="bottom"><span>Fiecare pas mic contează.</span><button id="clear" class="clear" type="button">Șterge terminatele</button></div>
+<p id="notice" role="status" hidden></p>
+</section><footer>Lista ta se salvează automat în acest browser.</footer>
+</main>
+<script>
+const key='lista-mea-v1';
+let tasks=[]; let filter='all';
+const list=document.querySelector('#list'), input=document.querySelector('#task'), notice=document.querySelector('#notice');
+function warn(text){notice.textContent=text;notice.hidden=false;}
+try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(saved))throw Error();tasks=saved.filter(t=>t&&typeof t.id==='string'&&typeof t.text==='string'&&typeof t.done==='boolean');}catch{warn('Lista salvată nu poate fi citită. Poți folosi în continuare aplicația.');}
+function save(){try{localStorage.setItem(key,JSON.stringify(tasks));}catch{warn('Browserul nu permite salvarea. Sarcinile vor rămâne disponibile doar până închizi pagina.');}}
+function render(){
+ list.replaceChildren();
+ const shown=tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));
+ for(const task of shown){
+ const row=document.createElement('li');row.classList.toggle('done',task.done);
+ const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=task.done;checkbox.id='task-'+task.id;
+ checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();render();document.getElementById(checkbox.id)?.focus();});
+ const label=document.createElement('label');label.htmlFor=checkbox.id;label.textContent=task.text;
+ const remove=document.createElement('button');remove.type='button';remove.className='delete';remove.textContent='×';remove.setAttribute('aria-label','Șterge: '+task.text);
+ remove.addEventListener('click',()=>{tasks=tasks.filter(t=>t.id!==task.id);save();render();input.focus();});
+ row.append(checkbox,label,remove);list.append(row);
+ }
+ const remaining=tasks.filter(t=>!t.done).length;
+ document.querySelector('#count').textContent=remaining===1?'1 de făcut':remaining+' de făcut';
+ const empty=document.querySelector('#empty');empty.hidden=shown.length>0;
+ empty.querySelector('strong').textContent=tasks.length?'Nicio sarcină în această categorie.':'Un început cu mintea limpede.';
+ empty.querySelector('span').textContent=tasks.length?'Alege alt filtru sau adaugă o sarcină nouă.':'Adaugă prima sarcină și ia lucrurile pe rând.';
+ document.querySelector('#clear').disabled=!tasks.some(t=>t.done);
+ document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+}
+document.querySelector('#add-form').addEventListener('submit',event=>{event.preventDefault();const text=input.value.trim();if(!text){input.value='';input.focus();return;}tasks.push({id:globalThis.crypto?.randomUUID?.() || ('local-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)),text,done:false});filter='all';save();render();input.value='';input.focus();});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;render();}));
+document.querySelector('#clear').addEventListener('click',()=>{tasks=tasks.filter(t=>!t.done);save();render();});
+render();
+</script>
+</body>
+</html>
