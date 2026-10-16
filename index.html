@@ -4,53 +4,119 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lista mea — Pas cu pas</title>
 <style>
-:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#243c35;background:#f5f4ef}*{box-sizing:border-box}body{margin:0}main{max-width:700px;margin:70px auto;padding:0 24px}.brand{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#587467;font-weight:700}.brand span{display:inline-grid;place-items:center;background:#dce9dd;border-radius:12px;width:32px;height:32px;margin-right:10px}h1{font-size:clamp(36px,7vw,52px);letter-spacing:-2px;margin:27px 0 8px}header p{color:#718078;margin:0 0 32px;line-height:1.6}.card{background:#fff;border:1px solid #e3e7df;border-radius:24px;padding:26px;box-shadow:0 12px 40px #263c3505}form{display:flex;gap:10px}input[type=text]{min-width:0;flex:1;border:1px solid #dce3da;border-radius:12px;padding:15px;font:inherit;background:#fafbf8;color:#243c35;caret-color:#243c35}input[type=text]::placeholder{color:#718078;opacity:1}input:focus-visible,button:focus-visible{outline:3px solid #95b6a0;outline-offset:3px}button{font:inherit;cursor:pointer}button.primary{background:#2e5f49;color:white;border:0;border-radius:12px;padding:12px 20px;font-weight:650}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:26px;border-bottom:1px solid #edf0e9;padding-bottom:18px}.filters{display:flex;gap:4px}.filters button{border:0;background:transparent;color:#738077;border-radius:8px;padding:8px 10px;font-size:13px}.filters button[aria-pressed=true]{background:#e9f0e7;color:#2e5f49;font-weight:700}#count{font-size:12px;color:#738077}ul{list-style:none;margin:0;padding:0}li{display:flex;align-items:center;gap:12px;padding:17px 0;border-bottom:1px solid #edf0e9}li input{accent-color:#2e5f49;width:19px;height:19px;flex-shrink:0}li label{flex:1;overflow-wrap:anywhere;line-height:1.5}li.done label{text-decoration:line-through;color:#929c93}.delete{border:0;background:transparent;color:#8c978f;font-size:23px;padding:2px 8px}.delete:hover{color:#b34242;background:#fff1ef;border-radius:6px}.empty{text-align:center;padding:46px 12px;color:#7c8980}.empty strong{display:block;color:#3f5c4b;font-weight:600;margin:14px 0 7px}.empty span{font-size:14px}.icon{font-size:32px}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:20px;font-size:12px;color:#869086}.clear{border:0;background:transparent;color:#56705d;font-size:12px;padding:5px}.clear:disabled{opacity:.4;cursor:default}footer{text-align:center;color:#899287;font-size:12px;margin:25px}#notice{font-size:13px;color:#a34932;line-height:1.5} @media(max-width:480px){main{margin:35px auto;padding:0 16px}.card{padding:18px}.toolbar{align-items:flex-start;flex-direction:column}button.primary{padding:12px}form{gap:7px}.bottom{align-items:flex-start}}
+:root{color-scheme:light;--bg:#f1f7f6;--panel:#fff;--field:#f7fbfa;--text:#193c3c;--muted:#567575;--border:#d9e8e5;--accent:#087f82;--soft:#def4f1;--danger:#a53143;--shadow:#143f3a08;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101e23;--panel:#182a30;--field:#12242a;--text:#e3f4f1;--muted:#a0bfbd;--border:#30494e;--accent:#66ded3;--soft:#233f43;--danger:#ffacb7;--shadow:#0002}
+*{box-sizing:border-box}body{margin:0}main{max-width:940px;margin:42px auto;padding:0 24px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:750;color:var(--accent)}.brand span{display:inline-grid;place-items:center;background:var(--soft);border-radius:12px;width:34px;height:34px;margin-right:10px;font-size:18px}h1{font-size:clamp(34px,6vw,48px);letter-spacing:-1.8px;line-height:1.13;margin:30px 0 12px}header p{color:var(--muted);margin:0 0 30px;line-height:1.6}.card{background:var(--panel);border:1px solid var(--border);border-radius:24px;padding:26px;box-shadow:0 12px 40px var(--shadow)}button,input,select{font:inherit}button{cursor:pointer}input,select{min-width:0;width:100%;border:1px solid var(--border);border-radius:10px;padding:11px 12px;color:var(--text);background:var(--field);accent-color:var(--accent)}input::placeholder{color:var(--muted);opacity:1}input,select{caret-color:var(--text)}input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button.primary{background:var(--accent);color:var(--panel);border:0;border-radius:10px;padding:12px 20px;font-weight:750}:root[data-theme=dark] button.primary{color:#102e30}.quiet{border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:10px;padding:9px 12px;font-size:13px}.entry{display:flex;gap:10px}.entry input{flex:1}.options{display:grid;grid-template-columns:1fr 1fr 1.2fr 1fr;gap:12px;margin-top:16px}label.field{display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--muted);min-width:0}.category-manager{margin:18px 0 4px;color:var(--muted);font-size:13px}.category-manager summary{cursor:pointer;width:fit-content}.category-entry{display:flex;gap:10px;margin-top:12px;max-width:450px}.category-entry input{flex:1}#category-feedback{font-size:12px;margin:8px 0;color:var(--accent)}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:25px;padding:20px 0;border-top:1px solid var(--border)}.tabs{display:flex;gap:5px}.tabs button{border:0;border-radius:9px;background:transparent;color:var(--muted);padding:10px 13px;font-size:14px}.tabs button[aria-pressed=true]{background:var(--soft);color:var(--accent);font-weight:750}#count{font-size:12px;color:var(--muted)}.filters{background:var(--field);border:1px solid var(--border);border-radius:14px;padding:15px}.filter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.sort-row{display:flex;align-items:end;gap:12px;justify-content:space-between;margin-top:12px}.sort-row .field{flex:1;max-width:300px}.reset{color:var(--accent);background:transparent;border:0;font-size:12px;padding:10px 0}.range-hint{font-size:12px;color:var(--danger);margin-bottom:0}ul{list-style:none;padding:0;margin:10px 0 0}li{display:flex;gap:13px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--border)}li input[type=checkbox]{margin:4px 0 0;width:20px;height:20px;flex-shrink:0;cursor:pointer}.task-body{flex:1;min-width:0}.task-title{display:block;line-height:1.5;overflow-wrap:anywhere;cursor:pointer}.done .task-title{text-decoration:line-through;color:var(--muted)}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--muted)}.badge{padding:4px 8px;border-radius:6px;background:var(--field);border:1px solid var(--border);overflow-wrap:anywhere;max-width:100%}.priority-high{color:var(--danger)}.priority-medium{color:var(--accent)}.overdue{color:var(--danger)}.delete{background:transparent;color:var(--muted);font-size:24px;line-height:1;border:0;padding:3px 8px}.delete:hover{color:var(--danger)}.empty{text-align:center;padding:40px 12px;color:var(--muted)}.empty strong{display:block;color:var(--text);margin:12px 0 8px;font-size:16px}.empty span{font-size:13px}.icon{font-size:30px;color:var(--accent)}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:20px;font-size:12px;color:var(--muted)}.clear{background:transparent;border:0;color:var(--accent);font-size:12px;padding:5px}.clear:disabled{opacity:.4;cursor:default}footer{text-align:center;font-size:12px;color:var(--muted);line-height:1.7;margin:24px}#notice{font-size:13px;color:var(--danger);line-height:1.6}[hidden]{display:none!important}
+@media(max-width:650px){main{margin:24px auto;padding:0 14px}.card{padding:17px}.options,.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{align-items:flex-start;flex-direction:column}.top .quiet{font-size:12px}.entry button{padding:12px}.bottom{align-items:flex-start}.tabs button{padding:9px 11px}.sort-row{gap:16px}.category-entry{flex-wrap:wrap}.category-entry input{flex-basis:180px}}
 </style>
 </head>
 <body>
 <main>
-<div class="brand"><span aria-hidden="true">✓</span> Pas cu pas</div>
-<header><h1>Mai puțin haos.<br>Mai mult făcut.</h1><p>Un loc simplu pentru lucrurile pe care vrei să le faci.</p></header>
+<div class="top"><div class="brand"><span aria-hidden="true">✓</span>Pas cu pas</div><button id="theme-toggle" class="quiet" type="button" aria-pressed="false">☾ Mod întunecat</button></div>
+<header><h1>Mai puțin haos.<br>Mai mult făcut.</h1><p>Fă loc pentru ce contează. Restul, pas cu pas.</p></header>
 <section class="card" aria-label="Lista de sarcini">
-<form id="add-form"><input id="task" type="text" maxlength="300" placeholder="Ce ai de făcut?" aria-label="Sarcină nouă" required autocomplete="off"><button class="primary" type="submit">Adaugă +</button></form>
-<div class="toolbar"><div class="filters" aria-label="Filtrează sarcinile"><button type="button" data-filter="all" aria-pressed="true">Toate</button><button type="button" data-filter="active" aria-pressed="false">De făcut</button><button type="button" data-filter="done" aria-pressed="false">Terminate</button></div><span id="count" aria-live="polite"></span></div>
+<form id="add-form">
+<div class="entry"><input id="task" type="text" maxlength="300" placeholder="Ce ai de făcut?" aria-label="Sarcină nouă" required autocomplete="off"><button class="primary" type="submit">Adaugă +</button></div>
+<div class="options">
+<label class="field">Data<input id="task-date" type="date"></label>
+<label class="field">Ora<input id="task-time" type="time"></label>
+<label class="field">Categorie<select id="task-category"><option value="">Fără categorie</option></select></label>
+<label class="field">Prioritate<select id="task-priority"><option value="medium">Medie</option><option value="high">Ridicată</option><option value="low">Scăzută</option></select></label>
+</div>
+</form>
+<details class="category-manager"><summary>＋ Creează o categorie</summary><form id="category-form" class="category-entry"><input id="new-category" type="text" maxlength="60" placeholder="Ex. Personal, Muncă…" aria-label="Numele categoriei" required autocomplete="off"><button type="submit" class="quiet">Creează</button></form><p id="category-feedback" role="status"></p></details>
+<div class="toolbar"><div class="tabs" aria-label="Starea sarcinilor"><button type="button" data-status="active" aria-pressed="true">De făcut</button><button type="button" data-status="done" aria-pressed="false">Terminate</button></div><span id="count" role="status"></span></div>
+<div class="filters" aria-label="Filtre și sortare">
+<div class="filter-grid">
+<label class="field">Categorie<select id="filter-category"><option value="all">Toate categoriile</option><option value="none">Fără categorie</option></select></label>
+<label class="field">Prioritate<select id="filter-priority"><option value="all">Toate prioritățile</option><option value="high">Ridicată</option><option value="medium">Medie</option><option value="low">Scăzută</option></select></label>
+<label class="field">Din data<input id="date-from" type="date"></label>
+<label class="field">Până în data<input id="date-to" type="date"></label>
+<label class="field">De la ora<input id="time-from" type="time"></label>
+<label class="field">Până la ora<input id="time-to" type="time"></label>
+</div>
+<div class="sort-row"><label class="field">Sortează după<select id="sort"><option value="date-asc">Data și ora ↑ (cele mai apropiate)</option><option value="date-desc">Data și ora ↓ (cele mai îndepărtate)</option><option value="priority-high">Prioritate: ridicată → scăzută</option><option value="priority-low">Prioritate: scăzută → ridicată</option><option value="category">Categorie: A → Z</option><option value="newest">Adăugate recent</option></select></label><button id="reset-filters" class="reset" type="button">Resetează filtrele</button></div>
+<p id="range-hint" class="range-hint" role="status" hidden>Începutul intervalului trebuie să fie înaintea sfârșitului.</p>
+</div>
 <ul id="list" aria-label="Sarcini"></ul>
 <div id="empty" class="empty"><div class="icon" aria-hidden="true">☀</div><strong>Un început cu mintea limpede.</strong><span>Adaugă prima sarcină și ia lucrurile pe rând.</span></div>
-<div class="bottom"><span>Fiecare pas mic contează.</span><button id="clear" class="clear" type="button">Șterge terminatele</button></div>
+<div class="bottom"><span id="progress">Fiecare pas mic contează.</span><button id="clear" class="clear" type="button">Șterge terminatele</button></div>
 <p id="notice" role="status" hidden></p>
-</section><footer>Lista ta se salvează automat în acest browser.</footer>
+</section><footer>Salvat automat în acest browser · Data și ora sunt locale.<br>Sarcinile bifate te așteaptă la „Terminate”.</footer>
 </main>
 <script>
-const key='lista-mea-v1';
-let tasks=[]; let filter='all';
-const list=document.querySelector('#list'), input=document.querySelector('#task'), notice=document.querySelector('#notice');
-function warn(text){notice.textContent=text;notice.hidden=false;}
-try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(saved))throw Error();tasks=saved.filter(t=>t&&typeof t.id==='string'&&typeof t.text==='string'&&typeof t.done==='boolean');}catch{warn('Lista salvată nu poate fi citită. Poți folosi în continuare aplicația.');}
-function save(){try{localStorage.setItem(key,JSON.stringify(tasks));}catch{warn('Browserul nu permite salvarea. Sarcinile vor rămâne disponibile doar până închizi pagina.');}}
-function render(){
- list.replaceChildren();
- const shown=tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));
- for(const task of shown){
- const row=document.createElement('li');row.classList.toggle('done',task.done);
- const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=task.done;checkbox.id='task-'+task.id;
- checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();render();document.getElementById(checkbox.id)?.focus();});
- const label=document.createElement('label');label.htmlFor=checkbox.id;label.textContent=task.text;
- const remove=document.createElement('button');remove.type='button';remove.className='delete';remove.textContent='×';remove.setAttribute('aria-label','Șterge: '+task.text);
- remove.addEventListener('click',()=>{tasks=tasks.filter(t=>t.id!==task.id);save();render();input.focus();});
- row.append(checkbox,label,remove);list.append(row);
- }
- const remaining=tasks.filter(t=>!t.done).length;
- document.querySelector('#count').textContent=remaining===1?'1 de făcut':remaining+' de făcut';
- const empty=document.querySelector('#empty');empty.hidden=shown.length>0;
- empty.querySelector('strong').textContent=tasks.length?'Nicio sarcină în această categorie.':'Un început cu mintea limpede.';
- empty.querySelector('span').textContent=tasks.length?'Alege alt filtru sau adaugă o sarcină nouă.':'Adaugă prima sarcină și ia lucrurile pe rând.';
- document.querySelector('#clear').disabled=!tasks.some(t=>t.done);
- document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+const $=selector=>document.querySelector(selector);
+const taskKey='lista-mea-v1', categoryKey='lista-mea-categories-v1', themeKey='lista-mea-theme';
+const priorities={high:'Ridicată',medium:'Medie',low:'Scăzută'}, ranks={high:0,medium:1,low:2};
+let tasks=[],categories=[],status='active';
+function warn(text){$('#notice').textContent=text;$('#notice').hidden=false;}
+function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch{warn('Unele date salvate nu pot fi citite. Poți folosi aplicația în continuare.');return fallback;}}
+function write(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{warn('Browserul nu permite salvarea. Modificările rămân disponibile doar în această sesiune.');}}
+const savedTasks=read(taskKey,[]),savedCategories=read(categoryKey,[]);
+const validDate=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value));
+const validTime=value=>typeof value==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+if(Array.isArray(savedCategories))categories=[...new Set(savedCategories.filter(c=>typeof c==='string'&&c.trim()).map(c=>c.trim()))];
+if(Array.isArray(savedTasks))tasks=savedTasks.filter(t=>t&&typeof t.id==='string'&&typeof t.text==='string'&&typeof t.done==='boolean').map(t=>({...t,date:validDate(t.date)?t.date:'',time:validDate(t.date)&&validTime(t.time)?t.time:'',category:typeof t.category==='string'?t.category:'',priority:Object.hasOwn(priorities,t.priority)?t.priority:'medium'}));
+for(const task of tasks)if(task.category&&!categories.includes(task.category))categories.push(task.category);
+const uid=()=>globalThis.crypto?.randomUUID?.()||'local-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+function save(){write(taskKey,tasks);}
+function setTheme(theme){document.documentElement.dataset.theme=theme;const dark=theme==='dark';$('#theme-toggle').setAttribute('aria-pressed',String(dark));$('#theme-toggle').textContent=dark?'☀ Mod luminos':'☾ Mod întunecat';}
+const savedTheme=read(themeKey,null);setTheme(savedTheme==='dark'||savedTheme==='light'?savedTheme:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+$('#theme-toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(theme);write(themeKey,theme);});
+function categoryOptions(){
+ const entry=$('#task-category'),filter=$('#filter-category'),entryValue=entry.value,filterValue=filter.value;
+ entry.replaceChildren(new Option('Fără categorie',''));filter.replaceChildren(new Option('Toate categoriile','all'),new Option('Fără categorie','none'));
+ for(const c of [...categories].sort((a,b)=>a.localeCompare(b,'ro'))){entry.add(new Option(c,c));filter.add(new Option(c,'category:'+c));}
+ entry.value=entryValue;filter.value=filterValue;
 }
-document.querySelector('#add-form').addEventListener('submit',event=>{event.preventDefault();const text=input.value.trim();if(!text){input.value='';input.focus();return;}tasks.push({id:globalThis.crypto?.randomUUID?.() || ('local-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)),text,done:false});filter='all';save();render();input.value='';input.focus();});
-document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;render();}));
-document.querySelector('#clear').addEventListener('click',()=>{tasks=tasks.filter(t=>!t.done);save();render();});
-render();
+$('#category-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#new-category'),name=input.value.trim();if(!name){input.value='';input.focus();return;}const existing=categories.find(c=>c.toLocaleLowerCase('ro')===name.toLocaleLowerCase('ro'));if(existing){$('#task-category').value=existing;$('#category-feedback').textContent='Categoria există deja și a fost selectată.';return;}categories.push(name);write(categoryKey,categories);categoryOptions();$('#task-category').value=name;input.value='';$('#category-feedback').textContent='Categoria „'+name+'” a fost creată și selectată.';});
+function filteredTasks(){
+ const category=$('#filter-category').value,priority=$('#filter-priority').value,from=$('#date-from').value,to=$('#date-to').value,timeFrom=$('#time-from').value,timeTo=$('#time-to').value;
+ $('#range-hint').hidden=!((from&&to&&from>to)||(timeFrom&&timeTo&&timeFrom>timeTo));
+ const shown=tasks.filter(t=>(status==='done'?t.done:!t.done)&&(category==='all'||(category==='none'?!t.category:t.category===category.slice(9)))&&(priority==='all'||t.priority===priority)&&(!from||(t.date&&t.date>=from))&&(!to||(t.date&&t.date<=to))&&(!timeFrom||(t.time&&t.time>=timeFrom))&&(!timeTo||(t.time&&t.time<=timeTo)));
+ const sort=$('#sort').value;
+ const due=t=>t.date+'T'+(t.time||'23:59');
+ const compareDate=(a,b,direction=1)=>{if(!a.date&&!b.date)return 0;if(!a.date)return 1;if(!b.date)return -1;return direction*due(a).localeCompare(due(b));};
+ const order=new Map(tasks.map((t,i)=>[t.id,i]));
+ shown.sort((a,b)=>{
+  let result=0;
+  if(sort==='date-asc')result=compareDate(a,b);
+  if(sort==='date-desc')result=compareDate(a,b,-1);
+  if(sort==='priority-high')result=ranks[a.priority]-ranks[b.priority];
+  if(sort==='priority-low')result=ranks[b.priority]-ranks[a.priority];
+  if(sort==='category')result=(!a.category)-(!b.category)||a.category.localeCompare(b.category,'ro');
+  if(sort==='newest')return order.get(b.id)-order.get(a.id);
+  return result||compareDate(a,b)||order.get(a.id)-order.get(b.id);
+ });return shown;
+}
+function badge(text,cls=''){const el=document.createElement('span');el.className='badge '+cls;el.textContent=text;return el;}
+function render(){
+ const list=$('#list');list.replaceChildren();const shown=filteredTasks();
+ for(const task of shown){
+  const row=document.createElement('li');row.classList.toggle('done',task.done);
+  const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=task.done;checkbox.id='task-'+task.id;
+  checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();render();$('#count').textContent+=(task.done?' · Mutată la Terminate':' · Mutată la De făcut');$('#task').focus();});
+  const body=document.createElement('div');body.className='task-body';const label=document.createElement('label');label.htmlFor=checkbox.id;label.className='task-title';label.textContent=task.text;
+  const meta=document.createElement('div');meta.className='meta';
+  if(task.date){const date=new Date(task.date+'T12:00:00').toLocaleDateString('ro-RO',{day:'numeric',month:'short',year:'numeric'});const overdue=!task.done&&new Date(task.date+'T'+(task.time||'23:59:59'))<new Date();meta.append(badge('◷ '+date+(task.time?' · '+task.time:'')+(overdue?' · Depășit':''),overdue?'overdue':''));}
+  meta.append(badge(task.category||'Fără categorie'),badge('Prioritate '+priorities[task.priority].toLocaleLowerCase('ro'),'priority-'+task.priority));
+  body.append(label,meta);const remove=document.createElement('button');remove.type='button';remove.className='delete';remove.textContent='×';remove.setAttribute('aria-label','Șterge: '+task.text);remove.addEventListener('click',()=>{tasks=tasks.filter(t=>t.id!==task.id);save();render();$('#task').focus();});row.append(checkbox,body,remove);list.append(row);
+ }
+ const active=tasks.filter(t=>!t.done).length,done=tasks.length-active;
+ $('#count').textContent=shown.length+' afișate · '+(status==='active'?active+' de făcut':done+' terminate');
+ $('#progress').textContent=done+' din '+tasks.length+' terminate';$('#clear').disabled=!done;
+ $('#empty').hidden=shown.length>0;$('#empty strong').textContent=tasks.length?'Nicio sarcină de afișat.':'Un început cu mintea limpede.';$('#empty span').textContent=tasks.length?'Schimbă filtrele sau adaugă o sarcină nouă.':'Adaugă prima sarcină și ia lucrurile pe rând.';
+ document.querySelectorAll('[data-status]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.status===status)));
+}
+$('#task-time').addEventListener('input',()=>$('#task-time').setCustomValidity(''));
+$('#task-date').addEventListener('input',()=>$('#task-time').setCustomValidity(''));
+$('#add-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#task'),text=input.value.trim(),date=$('#task-date').value,time=$('#task-time').value;if(!text){input.value='';input.focus();return;}if(time&&!date){$('#task-time').setCustomValidity('Alege și data pentru această oră.');$('#task-time').reportValidity();return;}tasks.push({id:uid(),text,done:false,date,time,category:$('#task-category').value,priority:$('#task-priority').value});save();status='active';resetFilters();input.value='';render();input.focus();});
+function resetFilters(){for(const id of ['date-from','date-to','time-from','time-to'])$('#'+id).value='';$('#filter-category').value='all';$('#filter-priority').value='all';}
+$('#reset-filters').addEventListener('click',()=>{resetFilters();render();});
+for(const id of ['filter-category','filter-priority','date-from','date-to','time-from','time-to','sort'])$('#'+id).addEventListener('change',render);
+for(const button of document.querySelectorAll('[data-status]'))button.addEventListener('click',()=>{status=button.dataset.status;render();});
+$('#clear').addEventListener('click',()=>{if(confirm('Ștergi definitiv toate sarcinile terminate?')){tasks=tasks.filter(t=>!t.done);save();render();}});
+categoryOptions();render();
 </script>
 </body>
 </html>
