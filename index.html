@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lista mea — Pas cu pas</title>
+<title>My Tasks</title>
 <style>
 :root{color-scheme:light;--bg:#f1f7f6;--panel:#fff;--field:#f7fbfa;--text:#193c3c;--muted:#567575;--border:#d9e8e5;--accent:#087f82;--soft:#def4f1;--danger:#a53143;--shadow:#143f3a08;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
 :root[data-theme=dark]{color-scheme:dark;--bg:#101e23;--panel:#182a30;--field:#12242a;--text:#e3f4f1;--muted:#a0bfbd;--border:#30494e;--accent:#66ded3;--soft:#233f43;--danger:#ffacb7;--shadow:#0002}
@@ -12,49 +12,49 @@
 </head>
 <body>
 <main>
-<div class="top"><div class="brand"><span aria-hidden="true">✓</span>Pas cu pas</div><button id="theme-toggle" class="quiet" type="button" aria-pressed="false">☾ Mod întunecat</button></div>
-<header><h1>Mai puțin haos.<br>Mai mult făcut.</h1><p>Fă loc pentru ce contează. Restul, pas cu pas.</p></header>
-<section class="card" aria-label="Lista de sarcini">
+<div class="top"><div class="brand"><span aria-hidden="true">✓</span>My Tasks</div><button id="theme-toggle" class="quiet" type="button" aria-pressed="false">☾ Dark mode</button></div>
+<header><h1>Your day.<br>A little more organized.</h1><p>Keep track of what needs to get done.</p></header>
+<section class="card" aria-label="Task list">
 <form id="add-form">
-<div class="entry"><input id="task" type="text" maxlength="300" placeholder="Ce ai de făcut?" aria-label="Sarcină nouă" required autocomplete="off"><button class="primary" type="submit">Adaugă +</button></div>
+<div class="entry"><input id="task" type="text" maxlength="300" placeholder="What needs to get done?" aria-label="New task" required autocomplete="off"><button class="primary" type="submit">Add +</button></div>
 <div class="options">
-<label class="field">Data<input id="task-date" type="date"></label>
-<label class="field">Ora<input id="task-time" type="time"></label>
-<label class="field">Categorie<select id="task-category"><option value="">Fără categorie</option></select></label>
-<label class="field">Prioritate<select id="task-priority"><option value="medium">Medie</option><option value="high">Ridicată</option><option value="low">Scăzută</option></select></label>
+<label class="field">Date<input id="task-date" type="date"></label>
+<label class="field">Time<input id="task-time" type="time"></label>
+<label class="field">Category<select id="task-category"><option value="">Uncategorized</option></select></label>
+<label class="field">Priority<select id="task-priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label>
 </div>
 </form>
-<details class="category-manager"><summary>＋ Creează o categorie</summary><form id="category-form" class="category-entry"><input id="new-category" type="text" maxlength="60" placeholder="Ex. Personal, Muncă…" aria-label="Numele categoriei" required autocomplete="off"><button type="submit" class="quiet">Creează</button></form><p id="category-feedback" role="status"></p></details>
-<div class="toolbar"><div class="tabs" aria-label="Starea sarcinilor"><button type="button" data-status="active" aria-pressed="true">De făcut</button><button type="button" data-status="done" aria-pressed="false">Terminate</button></div><span id="count" role="status"></span></div>
-<div class="list-controls" aria-label="Filtre și sortare">
-<details id="filters-panel" class="control-panel"><summary>Filtre<span id="filter-summary" class="filter-summary"></span></summary><div class="panel-content">
+<details class="category-manager"><summary>＋ Add a category</summary><form id="category-form" class="category-entry"><input id="new-category" type="text" maxlength="60" placeholder="e.g. Personal, Work…" aria-label="Category name" required autocomplete="off"><button type="submit" class="quiet">Create</button></form><p id="category-feedback" role="status"></p></details>
+<div class="toolbar"><div class="tabs" aria-label="Task status"><button type="button" data-status="active" aria-pressed="true">To do</button><button type="button" data-status="done" aria-pressed="false">Completed</button></div><span id="count" role="status"></span></div>
+<div class="list-controls" aria-label="Filters and sorting">
+<details id="filters-panel" class="control-panel"><summary>Filters<span id="filter-summary" class="filter-summary"></span></summary><div class="panel-content">
 <div class="filter-grid">
-<label class="field">Categorie<select id="filter-category"><option value="all">Toate categoriile</option><option value="none">Fără categorie</option></select></label>
-<label class="field">Prioritate<select id="filter-priority"><option value="all">Toate prioritățile</option><option value="high">Ridicată</option><option value="medium">Medie</option><option value="low">Scăzută</option></select></label>
-<label class="field">Din data<input id="date-from" type="date"></label>
-<label class="field">Până în data<input id="date-to" type="date"></label>
-<label class="field">De la ora<input id="time-from" type="time"></label>
-<label class="field">Până la ora<input id="time-to" type="time"></label>
+<label class="field">Category<select id="filter-category"><option value="all">All categories</option><option value="none">Uncategorized</option></select></label>
+<label class="field">Priority<select id="filter-priority"><option value="all">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></label>
+<label class="field">From date<input id="date-from" type="date"></label>
+<label class="field">To date<input id="date-to" type="date"></label>
+<label class="field">From time<input id="time-from" type="time"></label>
+<label class="field">To time<input id="time-to" type="time"></label>
 </div>
-<button id="reset-filters" class="reset" type="button">Resetează filtrele</button>
-<p id="range-hint" class="range-hint" role="status" hidden>Începutul intervalului trebuie să fie înaintea sfârșitului.</p>
+<button id="reset-filters" class="reset" type="button">Reset filters</button>
+<p id="range-hint" class="range-hint" role="status" hidden>The start of the range must be before the end.</p>
 </div></details>
-<details id="sort-panel" class="control-panel"><summary>Sortare</summary><div class="panel-content"><label class="field">Sortează după<select id="sort"><option value="date-asc">Data și ora ↑ (cele mai apropiate)</option><option value="date-desc">Data și ora ↓ (cele mai îndepărtate)</option><option value="priority-high">Prioritate: ridicată → scăzută</option><option value="priority-low">Prioritate: scăzută → ridicată</option><option value="category">Categorie: A → Z</option><option value="newest">Adăugate recent</option></select></label></div></details>
+<details id="sort-panel" class="control-panel"><summary>Sort</summary><div class="panel-content"><label class="field">Sort by<select id="sort"><option value="date-asc">Date & time: earliest first</option><option value="date-desc">Date & time: latest first</option><option value="priority-high">Priority: high → low</option><option value="priority-low">Priority: low → high</option><option value="category">Category: A → Z</option><option value="newest">Newest first</option></select></label></div></details>
 </div>
-<ul id="list" aria-label="Sarcini"></ul>
-<div id="empty" class="empty"><div class="icon" aria-hidden="true">☀</div><strong>Un început cu mintea limpede.</strong><span>Adaugă prima sarcină și ia lucrurile pe rând.</span></div>
-<div class="bottom"><span id="progress">Fiecare pas mic contează.</span><button id="clear" class="clear" type="button">Șterge terminatele</button></div>
+<ul id="list" aria-label="Tasks"></ul>
+<div id="empty" class="empty"><div class="icon" aria-hidden="true">☀</div><strong>A fresh start.</strong><span>Add your first task to get started.</span></div>
+<div class="bottom"><span id="progress">One task at a time.</span><button id="clear" class="clear" type="button">Clear completed</button></div>
 <p id="notice" role="status" hidden></p>
-</section><footer>Salvat automat în acest browser · Data și ora sunt locale.<br>Sarcinile bifate te așteaptă la „Terminate”.</footer>
+</section><footer>Saved automatically in this browser · Dates and times are local.<br>Finished tasks are stored under Completed.</footer>
 </main>
 <script>
 const $=selector=>document.querySelector(selector);
 const taskKey='lista-mea-v1', categoryKey='lista-mea-categories-v1', themeKey='lista-mea-theme';
-const priorities={high:'Ridicată',medium:'Medie',low:'Scăzută'}, ranks={high:0,medium:1,low:2};
+const priorities={high:'High',medium:'Medium',low:'Low'}, ranks={high:0,medium:1,low:2};
 let tasks=[],categories=[],status='active';
 function warn(text){$('#notice').textContent=text;$('#notice').hidden=false;}
-function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch{warn('Unele date salvate nu pot fi citite. Poți folosi aplicația în continuare.');return fallback;}}
-function write(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{warn('Browserul nu permite salvarea. Modificările rămân disponibile doar în această sesiune.');}}
+function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));}catch{warn('Some saved data could not be loaded. You can still use the app.');return fallback;}}
+function write(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{warn('Your browser could not save changes. They will only be available in this session.');}}
 const savedTasks=read(taskKey,[]),savedCategories=read(categoryKey,[]);
 const validDate=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value));
 const validTime=value=>typeof value==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(value);
@@ -63,16 +63,16 @@ if(Array.isArray(savedTasks))tasks=savedTasks.filter(t=>t&&typeof t.id==='string
 for(const task of tasks)if(task.category&&!categories.includes(task.category))categories.push(task.category);
 const uid=()=>globalThis.crypto?.randomUUID?.()||'local-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
 function save(){write(taskKey,tasks);}
-function setTheme(theme){document.documentElement.dataset.theme=theme;const dark=theme==='dark';$('#theme-toggle').setAttribute('aria-pressed',String(dark));$('#theme-toggle').textContent=dark?'☀ Mod luminos':'☾ Mod întunecat';}
+function setTheme(theme){document.documentElement.dataset.theme=theme;const dark=theme==='dark';$('#theme-toggle').setAttribute('aria-pressed',String(dark));$('#theme-toggle').textContent=dark?'☀ Light mode':'☾ Dark mode';}
 const savedTheme=read(themeKey,null);setTheme(savedTheme==='dark'||savedTheme==='light'?savedTheme:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
 $('#theme-toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(theme);write(themeKey,theme);});
 function categoryOptions(){
  const entry=$('#task-category'),filter=$('#filter-category'),entryValue=entry.value,filterValue=filter.value;
- entry.replaceChildren(new Option('Fără categorie',''));filter.replaceChildren(new Option('Toate categoriile','all'),new Option('Fără categorie','none'));
- for(const c of [...categories].sort((a,b)=>a.localeCompare(b,'ro'))){entry.add(new Option(c,c));filter.add(new Option(c,'category:'+c));}
+ entry.replaceChildren(new Option('Uncategorized',''));filter.replaceChildren(new Option('All categories','all'),new Option('Uncategorized','none'));
+ for(const c of [...categories].sort((a,b)=>a.localeCompare(b,'en'))){entry.add(new Option(c,c));filter.add(new Option(c,'category:'+c));}
  entry.value=entryValue;filter.value=filterValue;
 }
-$('#category-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#new-category'),name=input.value.trim();if(!name){input.value='';input.focus();return;}const existing=categories.find(c=>c.toLocaleLowerCase('ro')===name.toLocaleLowerCase('ro'));if(existing){$('#task-category').value=existing;$('#category-feedback').textContent='Categoria există deja și a fost selectată.';return;}categories.push(name);write(categoryKey,categories);categoryOptions();$('#task-category').value=name;input.value='';$('#category-feedback').textContent='Categoria „'+name+'” a fost creată și selectată.';});
+$('#category-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#new-category'),name=input.value.trim();if(!name){input.value='';input.focus();return;}const existing=categories.find(c=>c.toLocaleLowerCase('en')===name.toLocaleLowerCase('en'));if(existing){$('#task-category').value=existing;$('#category-feedback').textContent='This category already exists and has been selected.';return;}categories.push(name);write(categoryKey,categories);categoryOptions();$('#task-category').value=name;input.value='';$('#category-feedback').textContent='Category “'+name+'” created and selected.';});
 function filteredTasks(){
  const category=$('#filter-category').value,priority=$('#filter-priority').value,from=$('#date-from').value,to=$('#date-to').value,timeFrom=$('#time-from').value,timeTo=$('#time-to').value;
  const activeFilters=[category!=='all',priority!=='all',!!from,!!to,!!timeFrom,!!timeTo].filter(Boolean).length;
@@ -89,7 +89,7 @@ function filteredTasks(){
   if(sort==='date-desc')result=compareDate(a,b,-1);
   if(sort==='priority-high')result=ranks[a.priority]-ranks[b.priority];
   if(sort==='priority-low')result=ranks[b.priority]-ranks[a.priority];
-  if(sort==='category')result=(!a.category)-(!b.category)||a.category.localeCompare(b.category,'ro');
+  if(sort==='category')result=(!a.category)-(!b.category)||a.category.localeCompare(b.category,'en');
   if(sort==='newest')return order.get(b.id)-order.get(a.id);
   return result||compareDate(a,b)||order.get(a.id)-order.get(b.id);
  });return shown;
@@ -100,27 +100,27 @@ function render(){
  for(const task of shown){
   const row=document.createElement('li');row.classList.toggle('done',task.done);
   const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=task.done;checkbox.id='task-'+task.id;
-  checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();render();$('#count').textContent+=(task.done?' · Mutată la Terminate':' · Mutată la De făcut');$('#task').focus();});
+  checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();render();$('#count').textContent+=(task.done?' · Moved to Completed':' · Moved to To do');$('#task').focus();});
   const body=document.createElement('div');body.className='task-body';const label=document.createElement('label');label.htmlFor=checkbox.id;label.className='task-title';label.textContent=task.text;
   const meta=document.createElement('div');meta.className='meta';
-  if(task.date){const date=new Date(task.date+'T12:00:00').toLocaleDateString('ro-RO',{day:'numeric',month:'short',year:'numeric'});const overdue=!task.done&&new Date(task.date+'T'+(task.time||'23:59:59'))<new Date();meta.append(badge('◷ '+date+(task.time?' · '+task.time:'')+(overdue?' · Depășit':''),overdue?'overdue':''));}
-  meta.append(badge(task.category||'Fără categorie'),badge('Prioritate '+priorities[task.priority].toLocaleLowerCase('ro'),'priority-'+task.priority));
-  body.append(label,meta);const remove=document.createElement('button');remove.type='button';remove.className='delete';remove.textContent='×';remove.setAttribute('aria-label','Șterge: '+task.text);remove.addEventListener('click',()=>{tasks=tasks.filter(t=>t.id!==task.id);save();render();$('#task').focus();});row.append(checkbox,body,remove);list.append(row);
+  if(task.date){const date=new Date(task.date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});const overdue=!task.done&&new Date(task.date+'T'+(task.time||'23:59:59'))<new Date();meta.append(badge('◷ '+date+(task.time?' · '+task.time:'')+(overdue?' · Overdue':''),overdue?'overdue':''));}
+  meta.append(badge(task.category||'Uncategorized'),badge('Priority '+priorities[task.priority].toLocaleLowerCase('en'),'priority-'+task.priority));
+  body.append(label,meta);const remove=document.createElement('button');remove.type='button';remove.className='delete';remove.textContent='×';remove.setAttribute('aria-label','Delete: '+task.text);remove.addEventListener('click',()=>{tasks=tasks.filter(t=>t.id!==task.id);save();render();$('#task').focus();});row.append(checkbox,body,remove);list.append(row);
  }
  const active=tasks.filter(t=>!t.done).length,done=tasks.length-active;
- $('#count').textContent=shown.length+' afișate · '+(status==='active'?active+' de făcut':done+' terminate');
- $('#progress').textContent=done+' din '+tasks.length+' terminate';$('#clear').disabled=!done;
- $('#empty').hidden=shown.length>0;$('#empty strong').textContent=tasks.length?'Nicio sarcină de afișat.':'Un început cu mintea limpede.';$('#empty span').textContent=tasks.length?'Schimbă filtrele sau adaugă o sarcină nouă.':'Adaugă prima sarcină și ia lucrurile pe rând.';
+ $('#count').textContent=shown.length+' shown · '+(status==='active'?active+' to do':done+' completed');
+ $('#progress').textContent=done+' of '+tasks.length+' completed';$('#clear').disabled=!done;
+ $('#empty').hidden=shown.length>0;$('#empty strong').textContent=tasks.length?'No tasks to show.':'A fresh start.';$('#empty span').textContent=tasks.length?'Try different filters or add a new task.':'Add your first task to get started.';
  document.querySelectorAll('[data-status]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.status===status)));
 }
 $('#task-time').addEventListener('input',()=>$('#task-time').setCustomValidity(''));
 $('#task-date').addEventListener('input',()=>$('#task-time').setCustomValidity(''));
-$('#add-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#task'),text=input.value.trim(),date=$('#task-date').value,time=$('#task-time').value;if(!text){input.value='';input.focus();return;}if(time&&!date){$('#task-time').setCustomValidity('Alege și data pentru această oră.');$('#task-time').reportValidity();return;}tasks.push({id:uid(),text,done:false,date,time,category:$('#task-category').value,priority:$('#task-priority').value});save();status='active';resetFilters();input.value='';render();input.focus();});
+$('#add-form').addEventListener('submit',event=>{event.preventDefault();const input=$('#task'),text=input.value.trim(),date=$('#task-date').value,time=$('#task-time').value;if(!text){input.value='';input.focus();return;}if(time&&!date){$('#task-time').setCustomValidity('Choose a date for this time.');$('#task-time').reportValidity();return;}tasks.push({id:uid(),text,done:false,date,time,category:$('#task-category').value,priority:$('#task-priority').value});save();status='active';resetFilters();input.value='';render();input.focus();});
 function resetFilters(){for(const id of ['date-from','date-to','time-from','time-to'])$('#'+id).value='';$('#filter-category').value='all';$('#filter-priority').value='all';}
 $('#reset-filters').addEventListener('click',()=>{resetFilters();render();});
 for(const id of ['filter-category','filter-priority','date-from','date-to','time-from','time-to','sort'])$('#'+id).addEventListener('change',render);
 for(const button of document.querySelectorAll('[data-status]'))button.addEventListener('click',()=>{status=button.dataset.status;render();});
-$('#clear').addEventListener('click',()=>{if(confirm('Ștergi definitiv toate sarcinile terminate?')){tasks=tasks.filter(t=>!t.done);save();render();}});
+$('#clear').addEventListener('click',()=>{if(confirm('Permanently delete all completed tasks?')){tasks=tasks.filter(t=>!t.done);save();render();}});
 categoryOptions();render();
 </script>
 </body>

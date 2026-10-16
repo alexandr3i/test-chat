@@ -1,16 +1,23 @@
-# test-chat
+# My Tasks
 
-# Lista mea
+A dependency-free task list with a turquoise accent and light/dark themes.
 
-Aplicație de sarcini în română, fără dependențe externe. Permite adăugarea, bifarea și ștergerea sarcinilor, data și ora opționale, categorii create manual și priorități. Sarcinile bifate se mută în fila Terminate și pot fi readuse în De făcut. Include filtre combinate pentru categorie, prioritate, interval de date și ore, sortare după dată/oră, categorie, prioritate sau ordinea adăugării, precum și mod luminos/întunecat cu accent turcoaz. Sarcinile existente din versiunea inițială se păstrează. Datele sunt locale și nu declanșează notificări; filtrele orare se aplică orelor din fiecare zi selectată. Sarcinile fără dată sunt afișate ultimele la sortarea după dată. Datele sunt salvate în localStorage, separat pentru fiecare browser. Nu există conturi sau sincronizare între dispozitive.
+- Optional due dates and times, custom categories, and task priorities.
+- Completed tasks move to the Completed tab and can be restored to To do.
+- Separate collapsible panels for filters and sorting.
+- Combine category, priority, date range, and time range filters. Time ranges apply to each selected day.
+- Sort by date/time, category, priority, or newest first. Undated tasks appear last when sorting by date.
+- Tasks, categories, and theme preferences are saved in this browser's localStorage. Existing tasks from earlier versions are preserved.
 
-## Pornire
+Dates and times are local. There are no notifications, accounts, or cross-device synchronization.
 
-Ai nevoie de Node.js 18 sau mai nou.
+## Run locally
+
+Requires Node.js 18 or newer. No dependency installation is needed.
 
 ```sh
 cd /workspace/test-chat
 npm start
 ```
 
-Serverul ascultă pe portul 3000. Poți schimba portul folosind variabila `PORT`.
+The server listens on port 3000 by default. Set `PORT` to use another port. The app can also be hosted as a static site using `index.html`, including on GitHub Pages.
